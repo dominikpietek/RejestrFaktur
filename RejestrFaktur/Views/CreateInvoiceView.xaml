@@ -1,0 +1,87 @@
+﻿<Window x:Class="RejestrFaktur.Views.CreateInvoiceView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RejestrFaktur.Views"
+        xmlns:c="clr-namespace:RejestrFaktur.Converters"
+        mc:Ignorable="d"
+        Title="CreateInvoiceView" Height="960" Width="550">
+    <Window.Resources>
+        <c:IndexBooleanConverter x:Key="RadioButtonConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="290"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Wybierz rodzaj faktury:" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
+        <ComboBox Grid.Column="3" Grid.Row="1" Height="30" ItemsSource="{Binding InvoiceTypes}" SelectedIndex="{Binding InvoiceType, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Podaj numer faktury:" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" Height="30" Text="{Binding InvoiceNumber, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Podaj date wystawienia:" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center"/>
+        <DatePicker Grid.Column="3" Grid.Row="5" VerticalAlignment="Center" Height="30" SelectedDate="{Binding InvoiceDate, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Podaj date sprzedaży:" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center"/>
+        <DatePicker Grid.Column="3" Grid.Row="7" VerticalAlignment="Center" Height="30" SelectedDate="{Binding InvoiceSellDate, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Podaj termin płatności:" Grid.Column="1" Grid.Row="9" VerticalAlignment="Center"/>
+        <DatePicker Grid.Column="3" Grid.Row="9" VerticalAlignment="Center" Height="30" SelectedDate="{Binding PaymentDeadLine, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Metoda płatności:" Grid.Column="1" Grid.Row="11" VerticalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="11">
+            <RadioButton Margin="0 0 80 0" Content="przelew bankowy" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" GroupName="Payment" IsChecked="{Binding Path=PaymentMethod, Converter={StaticResource RadioButtonConverter}, ConverterParameter=0}" Cursor="Hand"/>
+            <RadioButton Content="gotówka" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" GroupName="Payment" IsChecked="{Binding Path=PaymentMethod, Converter={StaticResource RadioButtonConverter}, ConverterParameter=1}" Cursor="Hand"/>
+        </StackPanel>
+        <Label Content="Podaj numer konta bankowego*:" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="13" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="13" VerticalAlignment="Center" Height="30" Text="{Binding BankAccountNumber, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Podaj opis*:" Grid.Column="1" Grid.Row="15" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="15" VerticalAlignment="Center" Height="30" Text="{Binding InvoiceDescription, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Wpisz numer NIP kontrahenta*:" Grid.Column="1" Grid.Row="17" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Column="3" Grid.Row="17" VerticalAlignment="Center" Height="30" Text="{Binding InvoiceContractorNIPNumber, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Wpisz nazwe kontrahenta:" Grid.Column="1" Grid.Row="19" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Column="3" Grid.Row="19" VerticalAlignment="Center" Height="25" Text="{Binding InvoiceContractorName, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Wpisz adres kontrahenta:" Grid.Column="1" Grid.Row="20" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Column="3" Grid.Row="20" VerticalAlignment="Center" Height="25" Text="{Binding InvoiceContractorAddress, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Wpisz swój NIP" Grid.Column="1" Grid.Row="22" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="22" VerticalAlignment="Center" Height="30" Text="{Binding InvoiceOwnerNIPNumber, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Twoja nazwa:" Grid.Column="1" Grid.Row="24" VerticalAlignment="Center"/>
+        <Label Grid.Column="3" Grid.Row="24" VerticalAlignment="Center" Height="30" Content="{Binding InvoiceOwnerName, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="Twój adres:" Grid.Column="1" Grid.Row="25" VerticalAlignment="Center"/>
+        <Label Grid.Column="3" Grid.Row="25" VerticalAlignment="Center" Height="30" Content="{Binding InvoiceOwnerAddress, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <Label Content="* - pole nieobowiązkowe" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="27"/>
+        <Button Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="28" Margin="50 0" Content="ZAPISZ" Cursor="Hand" Command="{Binding SaveInvoiceButton}"/>
+    </Grid>
+</Window>
