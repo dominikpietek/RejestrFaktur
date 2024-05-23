@@ -220,6 +220,8 @@ namespace RejestrFaktur.Services
         {
             container.PaddingVertical(40).Column(column =>
             {
+                column.Item().AlignMiddle().Text($"Opis: {_model.Description}");
+                column.Item().Height(70);
                 column.Item().Row(row =>
                 {
                     row.RelativeItem().Column(column =>

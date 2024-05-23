@@ -194,3 +194,7 @@ C:\Programs\RejestrFaktur\RejestrFaktur\obj\Debug\net8.0-windows\refint\RejestrF
 C:\Programs\RejestrFaktur\RejestrFaktur\obj\Debug\net8.0-windows\RejestrFaktur.pdb
 C:\Programs\RejestrFaktur\RejestrFaktur\obj\Debug\net8.0-windows\RejestrFaktur.genruntimeconfig.cache
 C:\Programs\RejestrFaktur\RejestrFaktur\obj\Debug\net8.0-windows\ref\RejestrFaktur.dll
+C:\Programs\RejestrFaktur\RejestrFaktur\bin\Debug\net8.0-windows\xunit.abstractions.dll
+C:\Programs\RejestrFaktur\RejestrFaktur\bin\Debug\net8.0-windows\xunit.assert.dll
+C:\Programs\RejestrFaktur\RejestrFaktur\bin\Debug\net8.0-windows\xunit.core.dll
+C:\Programs\RejestrFaktur\RejestrFaktur\bin\Debug\net8.0-windows\xunit.execution.dotnet.dll

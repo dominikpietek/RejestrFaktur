@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "v41s7FNcOE115zeVvujFoaihafH831TJfxh2OkH84fENxuMvN314HMvoK4JncuiTI8B/ZbGe8nsWEoqewHYHig==",
+  "dgSpecHash": "0E8Oea1fRxz+nCWtF63cDG/9HGpT8FistgnNCJyiV/CJuREZZN/XHItIX+VJQsNUcR9TwZqku73lfap8JPH7sQ==",
   "success": true,
   "projectFilePath": "C:\\Programs\\RejestrFaktur\\RejestrFaktur\\RejestrFaktur.csproj",
   "expectedPackageFiles": [
@@ -105,7 +105,14 @@
     "C:\\Users\\domin\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
     "C:\\Users\\domin\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512",
     "C:\\Users\\domin\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\domin\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
+    "C:\\Users\\domin\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
+    "C:\\Users\\domin\\.nuget\\packages\\xunit\\2.8.0\\xunit.2.8.0.nupkg.sha512",
+    "C:\\Users\\domin\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
+    "C:\\Users\\domin\\.nuget\\packages\\xunit.analyzers\\1.13.0\\xunit.analyzers.1.13.0.nupkg.sha512",
+    "C:\\Users\\domin\\.nuget\\packages\\xunit.assert\\2.8.0\\xunit.assert.2.8.0.nupkg.sha512",
+    "C:\\Users\\domin\\.nuget\\packages\\xunit.core\\2.8.0\\xunit.core.2.8.0.nupkg.sha512",
+    "C:\\Users\\domin\\.nuget\\packages\\xunit.extensibility.core\\2.8.0\\xunit.extensibility.core.2.8.0.nupkg.sha512",
+    "C:\\Users\\domin\\.nuget\\packages\\xunit.extensibility.execution\\2.8.0\\xunit.extensibility.execution.2.8.0.nupkg.sha512"
   ],
   "logs": [
     {

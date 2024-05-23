@@ -5,10 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RejestrFaktur.Views"
         xmlns:c="clr-namespace:RejestrFaktur.Converters"
+        xmlns:v="clr-namespace:RejestrFaktur.Validations"
         mc:Ignorable="d"
         Title="CreateInvoiceView" Height="960" Width="550">
     <Window.Resources>
         <c:IndexBooleanConverter x:Key="RadioButtonConverter"/>
+        <ControlTemplate x:Key="validationTemplate">
+            <StackPanel>
+                <AdornedElementPlaceholder/>
+                <TextBlock Foreground="Red" FontSize="10" Text="{Binding ErrorContent}"/>
+            </StackPanel>
+        </ControlTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -53,7 +60,15 @@
         <Label Content="Wybierz rodzaj faktury:" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
         <ComboBox Grid.Column="3" Grid.Row="1" Height="30" ItemsSource="{Binding InvoiceTypes}" SelectedIndex="{Binding InvoiceType, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
         <Label Content="Podaj numer faktury:" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" Height="30" Text="{Binding InvoiceNumber, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" Validation.ErrorTemplate="{StaticResource validationTemplate}">
+            <TextBox.Text>
+                <Binding Path="InvoiceNumber" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <v:InvoiceNumberValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Content="Podaj date wystawienia:" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center"/>
         <DatePicker Grid.Column="3" Grid.Row="5" VerticalAlignment="Center" Height="30" SelectedDate="{Binding InvoiceDate, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
         <Label Content="Podaj date sprzedaży:" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center"/>

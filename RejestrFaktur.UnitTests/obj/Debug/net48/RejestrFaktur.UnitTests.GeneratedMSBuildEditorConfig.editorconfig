@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = RejestrFaktur.UnitTests
+build_property.ProjectDir = C:\Programs\RejestrFaktur\RejestrFaktur.UnitTests\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

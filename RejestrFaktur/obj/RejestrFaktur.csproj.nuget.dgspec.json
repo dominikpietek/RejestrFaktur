@@ -74,6 +74,10 @@
             "QuestPDF": {
               "target": "Package",
               "version": "[2024.3.6, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.8.0, )"
             }
           },
           "imports": [
