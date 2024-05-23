@@ -44,14 +44,14 @@ namespace RejestrFaktur.ViewModels
                 OnPropertyChanged(nameof(InvoiceSellDate));
             }
         }
-        private DateTime _PaymentDeadline;
-        public DateTime PaymentDeadline
+        private DateTime _PaymentDeadLine;
+        public DateTime PaymentDeadLine
         {
-            get { return _PaymentDeadline; }
+            get { return _PaymentDeadLine; }
             set
             {
-                _PaymentDeadline = value;
-                OnPropertyChanged(nameof(PaymentDeadline));
+                _PaymentDeadLine = value;
+                OnPropertyChanged(nameof(PaymentDeadLine));
             }
         }
         private PaymentMethodsEnum _PaymentMethod;
@@ -158,7 +158,7 @@ namespace RejestrFaktur.ViewModels
         {
             _model.InvoiceDate = this.InvoiceDate;
             _model.InvoiceSellDate = this.InvoiceSellDate;
-            _model.PaymentDeadLine = this.PaymentDeadline;
+            _model.PaymentDeadLine = this.PaymentDeadLine;
             _model.PaymentMethod = this.PaymentMethod;
             _model.BankAccountNumber = this.BankAccountNumber;
             _model.Description = this.InvoiceDescription;
@@ -192,7 +192,7 @@ namespace RejestrFaktur.ViewModels
             BankAccountNumber = _model.BankAccountNumber;
             InvoiceDate = _model.InvoiceDate;
             InvoiceSellDate = _model.InvoiceSellDate;
-            PaymentDeadline = _model.PaymentDeadLine;
+            PaymentDeadLine = _model.PaymentDeadLine;
             PaymentMethod = _model.PaymentMethod;
             InvoiceDescription = _model.Description;
             InvoiceContractorNIPNumber = _model.Contractor.NIPNumber;

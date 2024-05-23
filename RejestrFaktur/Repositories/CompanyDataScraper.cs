@@ -27,7 +27,7 @@ namespace RejestrFaktur.Repositories
             {
                 var webPage = htmlWeb.Load($"https://aleo.com/int/companies?phrase={_nip}");
                 var companyData = webPage.QuerySelector("body").Descendants().First(f => f.HasClass("catalog-row-top")).Descendants();
-                companyName = companyData.First(c => c.HasClass("catalog-row-first-line__company-name")).InnerText.ToString();
+                companyName = companyData.First(c => c.HasClass("catalog-row-first-line__company-name")).InnerText.ToString()[1..];
                 companyAddress = companyData.First(c => c.HasClass("catalog-row-company-info__address")).InnerText.ToString();
             }
             catch(Exception e)

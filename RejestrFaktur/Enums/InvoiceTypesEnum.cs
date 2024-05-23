@@ -14,6 +14,5 @@ namespace RejestrFaktur.Enums
         VATMarża,
         Korygująca,
         Wewnętrzna
-        //Oss
     }
 }

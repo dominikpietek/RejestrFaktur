@@ -26,6 +26,11 @@ namespace RejestrFaktur.Repositories
 
         }
 
+        public async Task<List<string>> GetAllInvoicesNumbers()
+        {
+            return await _db.Invoices.Select(i => i.InvoiceNumber).ToListAsync();
+        }
+
         public async Task<InvoiceModel> GetInvoiceByName(string name)
         {
             return await _db.Invoices

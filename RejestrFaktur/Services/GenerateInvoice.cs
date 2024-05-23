@@ -22,7 +22,6 @@ namespace RejestrFaktur.Services
         public GenerateInvoice(InvoiceModel model)
         {
             _model = model;
-            // opis, data do kiedy można zapłacić i ogólnie to sprawdź
         }
         
         public void Generate()
@@ -64,8 +63,9 @@ namespace RejestrFaktur.Services
             {
                 row.RelativeItem().Column(column =>
                 {
+                    string typeOfInvoice = (int)_model.InvoiceType == 3 ? "VAT Marża" : _model.InvoiceType.ToString();
                     column
-                        .Item().Text($"Faktura {_model.InvoiceType.ToString()} Nr. {_model.InvoiceNumber}")
+                        .Item().Text($"Faktura {typeOfInvoice} Nr. {_model.InvoiceNumber}")
                         .FontSize(20).SemiBold();
 
                     column.Item().Text(text =>
@@ -82,7 +82,8 @@ namespace RejestrFaktur.Services
                     column.Item().Text(text =>
                     {
                         text.Span("Sposób Płatności: ").SemiBold();
-                        text.Span($"{_model.PaymentMethod.ToString()}");
+                        string payment = (int)_model.PaymentMethod == 0 ? "Przelew Bankowy" : _model.PaymentMethod.ToString();
+                        text.Span($"{payment}");
                     });
                     column.Item().Text(text =>
                     {
@@ -169,7 +170,7 @@ namespace RejestrFaktur.Services
                 {
                     lp += 1;
                     double net = item.NetPrice * item.Amount;
-                    double tax = net * (item.TaxRate / 100);
+                    double tax = net * (item.TaxRate / 1000);
                     double gross = net + tax;
                     table.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(x => x.FontSize(10)).AlignCenter().Text($"{lp}");
                     table.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(x => x.FontSize(10)).AlignCenter().Text($"{item.Name}");
@@ -177,7 +178,7 @@ namespace RejestrFaktur.Services
                     table.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(x => x.FontSize(10)).AlignCenter().Text($"{item.Amount}");
                     table.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(x => x.FontSize(10)).AlignCenter().Text($"{item.NetPrice}");
                     table.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(x => x.FontSize(10)).AlignCenter().Text($"{Math.Round(net, 2)}");
-                    table.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(x => x.FontSize(10)).AlignCenter().Text($"{Math.Round(item.TaxRate, 2)}%");
+                    table.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(x => x.FontSize(10)).AlignCenter().Text($"{Math.Round((double)(item.TaxRate / 10), 2)}%");
                     table.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(x => x.FontSize(10)).AlignCenter().Text($"{Math.Round(tax, 2)}");
                     table.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(x => x.FontSize(10)).AlignCenter().Text($"{Math.Round(gross, 2)}");
                     netSum += net;
@@ -206,13 +207,11 @@ namespace RejestrFaktur.Services
                     columns.ConstantColumn(130);
                     columns.RelativeColumn();
                 });
-                table.Cell().Text("Zapłacono:");
-                table.Cell().Text("0 zł");
                 table.Cell().Text("Pozostało do zapłaty:");
-                table.Cell().Text($"{_finalPrice} zł");
+                table.Cell().Text($"{Math.Round(_finalPrice, 2)} zł");
                 table.Cell().Text("Słownie:");
                 var changeToWords = new ChangeNumbersToWords(_finalPrice);
-                table.Cell().Text($"{changeToWords.ToWords()}");
+                table.Cell().Text($"{changeToWords.ToWords()[1..]}");
             });
         }
 

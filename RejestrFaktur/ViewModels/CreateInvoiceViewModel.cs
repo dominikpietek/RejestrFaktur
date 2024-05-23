@@ -29,8 +29,8 @@ namespace RejestrFaktur.ViewModels
                 OnPropertyChanged(nameof(InvoiceTypes));
             }
         }
-        private InvoiceTypesEnum _InvoiceType;
-        public InvoiceTypesEnum InvoiceType
+        private int _InvoiceType;
+        public int InvoiceType
         {
             get { return _InvoiceType; }
             set
@@ -79,14 +79,14 @@ namespace RejestrFaktur.ViewModels
                 OnPropertyChanged(nameof(InvoiceSellDate));
             }
         }
-        private DateTime _PaymentDeadline;
-        public DateTime PaymentDeadline
+        private DateTime _PaymentDeadLine;
+        public DateTime PaymentDeadLine
         {
-            get { return _PaymentDeadline; }
+            get { return _PaymentDeadLine; }
             set
             {
-                _PaymentDeadline = value;
-                OnPropertyChanged(nameof(PaymentDeadline));
+                _PaymentDeadLine = value;
+                OnPropertyChanged(nameof(PaymentDeadLine));
             }
         }
         private PaymentMethodsEnum _PaymentMethod;
@@ -186,6 +186,9 @@ namespace RejestrFaktur.ViewModels
         {
             InvoiceTypes = GenerateListFromEnum.Generate<InvoiceTypesEnum>(InvoiceTypes);
             InvoiceType = 0;
+            InvoiceDate = DateTime.Now;
+            InvoiceSellDate = DateTime.Now;
+            PaymentDeadLine = DateTime.Now;
             SaveInvoiceButton = new SaveInvoiceCommand(CreateObjectFromData, CloseWindow);
         }
 
@@ -193,11 +196,11 @@ namespace RejestrFaktur.ViewModels
         {
             var invoice = new InvoiceModel()
             {
-                InvoiceType = this.InvoiceType,
+                InvoiceType = (InvoiceTypesEnum)InvoiceType,
                 InvoiceDate = this.InvoiceDate,
                 InvoiceNumber = this.InvoiceNumber,
                 InvoiceSellDate = this.InvoiceSellDate,
-                PaymentDeadLine = this.PaymentDeadline,
+                PaymentDeadLine = this.PaymentDeadLine,
                 PaymentMethod = this.PaymentMethod,
                 BankAccountNumber = this.BankAccountNumber,
                 Description = this.InvoiceDescription,

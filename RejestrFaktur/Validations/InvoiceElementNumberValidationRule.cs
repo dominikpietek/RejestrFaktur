@@ -14,15 +14,19 @@ namespace RejestrFaktur.Validations
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            int valueInt = int.Parse(value.ToString());
-            if (valueInt != 0)
+            int valueInt;
+            if (int.TryParse(value.ToString(), out valueInt))
             {
-                return ValidationResult.ValidResult;
+                if (valueInt != 0)
+                {
+                    return ValidationResult.ValidResult;
+                }
+                else
+                {
+                    return new ValidationResult(false, "Liczba nie może być zerem!");
+                }
             }
-            else
-            {
-                return new ValidationResult(false, "Liczba nie może być zerem!");
-            }
+            return new ValidationResult(false, "Liczba nie może być zerem!");
         }
     }
 }

@@ -38,7 +38,6 @@ namespace RejestrFaktur.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NIPNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RejestrFaktur.ViewModels
 {
@@ -48,8 +49,8 @@ namespace RejestrFaktur.ViewModels
                 OnPropertyChanged(nameof(ItemUnits));
             }
         }
-        private UnitsEnum _ItemUnit;
-        public UnitsEnum ItemUnit
+        private int _ItemUnit;
+        public int ItemUnit
         {
             get { return _ItemUnit; }
             set
@@ -58,8 +59,8 @@ namespace RejestrFaktur.ViewModels
                 OnPropertyChanged(nameof(ItemUnit));
             }
         }
-        private double _ItemNetPrice;
-        public double ItemNetPrice
+        private string _ItemNetPrice;
+        public string ItemNetPrice
         {
             get { return _ItemNetPrice; }
             set
@@ -91,6 +92,8 @@ namespace RejestrFaktur.ViewModels
         #endregion
 
         public ICommand SaveUpdatesButton { get; set; }
+        public ICommand SliderPlusButton { get; set; }
+        public ICommand SliderMinusButton { get; set; }
         private InvoiceModel _model;
 
         public EditInvoiceElementViewModel(InvoiceModel model)
@@ -98,19 +101,37 @@ namespace RejestrFaktur.ViewModels
             _model = model;
             SaveUpdatesButton = new SaveUpdatesCommand(AddChangesToModel, RestartProperties);
             ItemUnits = GenerateListFromEnum.Generate<UnitsEnum>(ItemUnits);
+            SliderMinusButton = new SliderCommand(ChangeTaxRateValue, -1);
+            SliderPlusButton = new SliderCommand(ChangeTaxRateValue, 1);
+        }
+
+        public void ChangeTaxRateValue(int value)
+        {
+            ItemTaxRate += value;
         }
 
         public InvoiceModel AddChangesToModel()
         {
-            _model.Items[ItemNumber - 1] = new ItemModel()
+            if (_model.Items.Count() >= ItemNumber && ItemNumber > 0)
             {
-                Id = _model.Items[ItemNumber - 1].Id,
-                Name = ItemName,
-                Unit = ItemUnit,
-                Amount = ItemAmount,
-                NetPrice = ItemNetPrice,
-                TaxRate = (double)(ItemTaxRate / 10)
-            };
+                _model.Items[ItemNumber - 1] = new ItemModel()
+                {
+                    Id = _model.Items[ItemNumber - 1].Id,
+                    Name = ItemName,
+                    Unit = (UnitsEnum)ItemUnit,
+                    Amount = ItemAmount,
+                    NetPrice = double.Parse(ItemNetPrice),
+                    TaxRate = ItemTaxRate
+                };
+            }
+            else
+            {
+                MessageBox.Show(
+                    messageBoxText: "Nie istniejący numer produktu!",
+                    caption: "",
+                    button: MessageBoxButton.OK,
+                    icon: MessageBoxImage.Error);
+            }
             return _model;
         }
 
@@ -122,7 +143,7 @@ namespace RejestrFaktur.ViewModels
             ItemUnits = GenerateListFromEnum.Generate<UnitsEnum>(ItemUnits);
             ItemUnit = 0;
             ItemAmount = 0;
-            ItemNetPrice = 0;
+            ItemNetPrice = "0";
             ItemTaxRate = 230;
         }
 
@@ -132,10 +153,10 @@ namespace RejestrFaktur.ViewModels
             {
                 ItemModel choosenItem = _model.Items[number - 1];
                 ItemName = choosenItem.Name;
-                ItemUnit = choosenItem.Unit;
+                ItemUnit = (int)choosenItem.Unit;
                 ItemAmount = choosenItem.Amount;
-                ItemNetPrice = choosenItem.NetPrice;
-                ItemTaxRate = (int)(choosenItem.TaxRate * 10);
+                ItemNetPrice = choosenItem.NetPrice.ToString();
+                ItemTaxRate = (int)(choosenItem.TaxRate);
             }
         }
     }

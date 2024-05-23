@@ -5,16 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RejestrFaktur.Views"
         mc:Ignorable="d"
-        Title="Rejestr Faktur" Height="450" Width="800">
+        Title="Rejestr Faktur" Height="360" Width="640">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" x:Key="buttonStyle">
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="BorderThickness" Value="4"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Margin="50" Cursor="Hand" Command="{Binding BrowseInvoicesButton}">
-            HISTORIA FAKTUR
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Margin="50 50 50 25" Command="{Binding BrowseInvoicesButton}" Style="{StaticResource buttonStyle}">
+            BIBLIOTEKA FAKTUR
         </Button>
-        <Button Grid.Column="1" Margin="50" Cursor="Hand" Command="{Binding CreateInvoiceButton}">
+        <Button Grid.Row="1" Margin="50 25 50 50" Command="{Binding CreateInvoiceButton}" Style="{StaticResource buttonStyle}">
             NOWA FAKTURA
         </Button>
     </Grid>

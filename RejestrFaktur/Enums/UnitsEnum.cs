@@ -8,6 +8,6 @@ namespace RejestrFaktur.Enums
 {
     public enum UnitsEnum
     {
-        brak, mb, m, cm
+        brak, mb, m, cm, szt
     }
 }

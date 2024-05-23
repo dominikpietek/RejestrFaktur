@@ -12,15 +12,19 @@ namespace RejestrFaktur.Validations
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            int valueInt = int.Parse(value.ToString());
-            if (valueInt > 0)
+            int valueInt;
+            if (int.TryParse(value.ToString(), out valueInt))
             {
-                return ValidationResult.ValidResult;
+                if (valueInt > 0)
+                {
+                    return ValidationResult.ValidResult;
+                }
+                else
+                {
+                    return new ValidationResult(false, "Ilość może zawierać tylko liczby dodatnie!");
+                }
             }
-            else
-            {
-                return new ValidationResult(false, "Ilość może zawierać tylko liczby dodatnie!");
-            }
+            return new ValidationResult(false, "Ilość może zawierać tylko liczby dodatnie!");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RejestrFaktur.Enums;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -23,9 +24,10 @@ namespace RejestrFaktur.Converters
         {
             if (parameter != null)
             {
-                return (int)System.Convert.ToInt32(parameter);
+                int index = (int)System.Convert.ToInt32(parameter);
+                return index == 1 ? PaymentMethodsEnum.Gotówka : PaymentMethodsEnum.PrzelewBankowy;
             }
-            return 0;
+            return PaymentMethodsEnum.PrzelewBankowy;
         }
     }
 }

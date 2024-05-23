@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,11 +10,9 @@ namespace RejestrFaktur.Services
 {
     public static class SearchInvoicesLocally
     {
-        private const string REALTIVEPATH = @"C:\Programs\RejestrFaktur\RejestrFaktur\Invoices\";
-
         public static IEnumerable<string> GetInvoicesName()
         {
-            foreach (var file in Directory.GetFiles(REALTIVEPATH))
+            foreach (var file in Directory.GetFiles(@$"{ConfigurationManager.AppSettings["AbsolutePath"]}\Invoices\"))
             {
                 yield return Path.GetFileNameWithoutExtension(file).ToString();
             }

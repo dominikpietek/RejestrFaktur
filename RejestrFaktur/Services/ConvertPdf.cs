@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace RejestrFaktur.Services
     {
         public static void FromByteArray(byte[] byteArray, string fileName)
         {
-            File.WriteAllBytes($@"C:\Programs\RejestrFaktur\RejestrFaktur\Invoices\{fileName}", byteArray);
+            File.WriteAllBytes($@"{ConfigurationManager.AppSettings["AbsolutePath"]}Invoices\{fileName}", byteArray);
         }
     }
 }

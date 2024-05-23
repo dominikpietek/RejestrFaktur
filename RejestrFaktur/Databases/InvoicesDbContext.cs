@@ -2,6 +2,7 @@
 using RejestrFaktur.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,8 @@ namespace RejestrFaktur.Databases
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-KKCA33K;Database=InvoicesDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;");
+
+            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["MainDb"].ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

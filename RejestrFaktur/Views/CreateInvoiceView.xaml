@@ -7,7 +7,7 @@
         xmlns:c="clr-namespace:RejestrFaktur.Converters"
         xmlns:v="clr-namespace:RejestrFaktur.Validations"
         mc:Ignorable="d"
-        Title="CreateInvoiceView" Height="960" Width="550">
+        Title="Tworzenie Faktury" Height="960" Width="550">
     <Window.Resources>
         <c:IndexBooleanConverter x:Key="RadioButtonConverter"/>
         <ControlTemplate x:Key="validationTemplate">
@@ -60,7 +60,7 @@
         <Label Content="Wybierz rodzaj faktury:" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
         <ComboBox Grid.Column="3" Grid.Row="1" Height="30" ItemsSource="{Binding InvoiceTypes}" SelectedIndex="{Binding InvoiceType, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
         <Label Content="Podaj numer faktury:" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" Validation.ErrorTemplate="{StaticResource validationTemplate}">
+        <TextBox Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" Validation.ErrorTemplate="{StaticResource validationTemplate}" x:Name="invoiceNumber">
             <TextBox.Text>
                 <Binding Path="InvoiceNumber" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                     <Binding.ValidationRules>
@@ -85,18 +85,59 @@
         <Label Content="Podaj opis*:" Grid.Column="1" Grid.Row="15" VerticalAlignment="Center"/>
         <TextBox Grid.Column="3" Grid.Row="15" VerticalAlignment="Center" Height="30" Text="{Binding InvoiceDescription, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
         <Label Content="Wpisz numer NIP kontrahenta*:" Grid.Column="1" Grid.Row="17" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Column="3" Grid.Row="17" VerticalAlignment="Center" Height="30" Text="{Binding InvoiceContractorNIPNumber, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="17" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" Text="{Binding InvoiceContractorNIPNumber, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Content="Wpisz nazwe kontrahenta:" Grid.Column="1" Grid.Row="19" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Grid.Column="3" Grid.Row="19" VerticalAlignment="Center" Height="25" Text="{Binding InvoiceContractorName, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
         <Label Content="Wpisz adres kontrahenta:" Grid.Column="1" Grid.Row="20" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Grid.Column="3" Grid.Row="20" VerticalAlignment="Center" Height="25" Text="{Binding InvoiceContractorAddress, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
         <Label Content="Wpisz swój NIP" Grid.Column="1" Grid.Row="22" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="3" Grid.Row="22" VerticalAlignment="Center" Height="30" Text="{Binding InvoiceOwnerNIPNumber, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="22" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" Validation.ErrorTemplate="{StaticResource validationTemplate}" x:Name="ownerNip">
+            <TextBox.Text>
+                <Binding Path="InvoiceOwnerNIPNumber" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <v:InvoiceNIPValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Content="Twoja nazwa:" Grid.Column="1" Grid.Row="24" VerticalAlignment="Center"/>
         <Label Grid.Column="3" Grid.Row="24" VerticalAlignment="Center" Height="30" Content="{Binding InvoiceOwnerName, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
         <Label Content="Twój adres:" Grid.Column="1" Grid.Row="25" VerticalAlignment="Center"/>
         <Label Grid.Column="3" Grid.Row="25" VerticalAlignment="Center" Height="30" Content="{Binding InvoiceOwnerAddress, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
         <Label Content="* - pole nieobowiązkowe" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="27"/>
-        <Button Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="28" Margin="50 0" Content="ZAPISZ" Cursor="Hand" Command="{Binding SaveInvoiceButton}"/>
+        <Button Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="28" Margin="50 0" Content="ZAPISZ" Cursor="Hand" Command="{Binding SaveInvoiceButton}">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=invoiceNumber}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ownerNip}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding InvoiceType}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding InvoiceContractorName}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                            <DataTrigger Binding="{Binding InvoiceContractorAddress}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding InvoiceOwnerNIPNumber}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding InvoiceOwnerName}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding InvoiceOwnerAddress}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>

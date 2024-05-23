@@ -40,8 +40,8 @@ namespace RejestrFaktur.ViewModels
                 OnPropertyChanged(nameof(ItemUnits));
             }
         }
-        private UnitsEnum _ItemUnit;
-        public UnitsEnum ItemUnit
+        private int _ItemUnit;
+        public int ItemUnit
         {
             get { return _ItemUnit; }
             set
@@ -50,8 +50,8 @@ namespace RejestrFaktur.ViewModels
                 OnPropertyChanged(nameof(ItemUnit));
             }
         }
-        private double _ItemNetPrice;
-        public double ItemNetPrice
+        private string _ItemNetPrice;
+        public string ItemNetPrice
         {
             get { return _ItemNetPrice; }
             set
@@ -86,6 +86,8 @@ namespace RejestrFaktur.ViewModels
         public ICommand AddAndSaveButton { get; set; }
         #endregion
 
+        public ICommand SliderPlusButton { get; set; }
+        public ICommand SliderMinusButton { get; set; }
         private InvoiceModel _model;
 
         public AddItemToInvoiceViewModel(InvoiceModel model, Action CloseWindow)
@@ -94,6 +96,13 @@ namespace RejestrFaktur.ViewModels
             ItemUnits = GenerateListFromEnum.Generate<UnitsEnum>(ItemUnits);
             AddAnotherItemButton = new AddAnotherItemCommand(AddItem, CloseWindow, _model);
             AddAndSaveButton = new AddAndSaveCommand(Save, CloseWindow, _model);
+            SliderMinusButton = new SliderCommand(ChangeTaxRateValue, -1);
+            SliderPlusButton = new SliderCommand(ChangeTaxRateValue, 1);
+        }
+
+        public void ChangeTaxRateValue(int value)
+        {
+            ItemTaxRate += value;
         }
 
         private void AddItem()
@@ -101,10 +110,10 @@ namespace RejestrFaktur.ViewModels
             _model.Items.Add(new ItemModel()
             {
                 Name = ItemName,
-                Unit = ItemUnit,
+                Unit = (UnitsEnum)ItemUnit,
                 Amount = ItemAmount,
-                NetPrice = ItemNetPrice,
-                TaxRate = (double)(ItemTaxRate / 10)
+                NetPrice = double.Parse(ItemNetPrice),
+                TaxRate = ItemTaxRate
             });   
         }
 
