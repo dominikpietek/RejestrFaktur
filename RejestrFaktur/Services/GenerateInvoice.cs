@@ -46,7 +46,7 @@ namespace RejestrFaktur.Services
 
         public void Save(string fileName)
         {
-            ConvertPdf.FromByteArray(_pdfDocument, fileName);
+            ConvertPdf.FromByteArray(_pdfDocument, fileName.Replace("/", "."));
         }
 
         public void Show()
