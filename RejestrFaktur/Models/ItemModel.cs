@@ -15,7 +15,7 @@ namespace RejestrFaktur.Models
         public string Name { get; set; } = "";
         public UnitsEnum Unit { get; set; }
         public int Amount { get; set; }
-        public int NetPrice { get; set; }
+        public double NetPrice { get; set; }
         public double TaxRate { get; set; }
     }
 }

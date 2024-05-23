@@ -184,22 +184,13 @@ namespace RejestrFaktur.ViewModels
 
         public CreateInvoiceViewModel(Action CloseWindow)
         {
-            GenerateComboBoxItems();
+            InvoiceTypes = GenerateListFromEnum.Generate<InvoiceTypesEnum>(InvoiceTypes);
             InvoiceType = 0;
             SaveInvoiceButton = new SaveInvoiceCommand(CreateObjectFromData, CloseWindow);
         }
 
         private InvoiceModel CreateObjectFromData()
         {
-            var items = new List<ItemModel>();
-            items.Add(new ItemModel()
-            {
-                Name = "Mandarynka Luzem",
-                Unit = 0,
-                Amount = 10,
-                NetPrice = 2,
-                TaxRate = 23
-            });
             var invoice = new InvoiceModel()
             {
                 InvoiceType = this.InvoiceType,
@@ -221,19 +212,9 @@ namespace RejestrFaktur.ViewModels
                     NIPNumber = InvoiceOwnerNIPNumber,
                     Name = InvoiceOwnerName,
                     Address = InvoiceOwnerAddress
-                },
-                Items = items
+                }
             };
             return invoice;
-        }
-
-        private void GenerateComboBoxItems()
-        {
-            var enumNames = Enum.GetNames(typeof(InvoiceTypesEnum));
-            foreach (string enumName in enumNames)
-            {
-                InvoiceTypes.Add(new ComboBoxItem() { Content = enumName });
-            }
         }
 
         private void ScrapeContractorData(string nip)

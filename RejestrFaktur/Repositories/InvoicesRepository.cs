@@ -28,7 +28,17 @@ namespace RejestrFaktur.Repositories
 
         public async Task<InvoiceModel> GetInvoiceByName(string name)
         {
-            return await _db.Invoices.FirstAsync(i => i.InvoiceNumber == name);
+            return await _db.Invoices
+                .Include(i => i.Contractor)
+                .Include(i => i.Owner)
+                .Include(i => i.Items)
+                .FirstAsync(i => i.InvoiceNumber == name);
+        }
+
+        public async Task<bool> RemoveInvoiceById(int id)
+        {
+            _db.Invoices.Remove(await _db.Invoices.FirstAsync(i => i.Id == id));
+            return await Save();
         }
 
         public async Task<bool> Save()

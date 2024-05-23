@@ -16,6 +16,12 @@
     <Compile Update="Views\CreateInvoiceView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\EditInvoiceDataView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EditInvoiceElementView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\MainWindowView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +34,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CreateInvoiceView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EditInvoiceDataView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EditInvoiceElementView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindowView.xaml">

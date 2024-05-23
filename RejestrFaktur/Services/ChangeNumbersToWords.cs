@@ -43,7 +43,7 @@ namespace RejestrFaktur.Services
 
             if (_number - approximateFloorNumber > 0)
             {
-                sufix = $"PLN {Math.Round(_number - approximateFloorNumber, 2) * 100}/100";
+                sufix = $"PLN {(int)(Math.Round(_number - approximateFloorNumber, 2) * 100)}/100";
             }
 
             while (approximateFloorNumber > 1)

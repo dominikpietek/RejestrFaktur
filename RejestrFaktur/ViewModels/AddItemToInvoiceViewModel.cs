@@ -50,8 +50,8 @@ namespace RejestrFaktur.ViewModels
                 OnPropertyChanged(nameof(ItemUnit));
             }
         }
-        private int _ItemNetPrice;
-        public int ItemNetPrice
+        private double _ItemNetPrice;
+        public double ItemNetPrice
         {
             get { return _ItemNetPrice; }
             set
@@ -91,9 +91,9 @@ namespace RejestrFaktur.ViewModels
         public AddItemToInvoiceViewModel(InvoiceModel model, Action CloseWindow)
         {
             _model = model;
-            GenerateUnits();
-            AddAnotherItemButton = new AddAnotherItemCommand(AddItem);
-            AddAndSaveButton = new AddAndSaveCommand(Save, CloseWindow);
+            ItemUnits = GenerateListFromEnum.Generate<UnitsEnum>(ItemUnits);
+            AddAnotherItemButton = new AddAnotherItemCommand(AddItem, CloseWindow, _model);
+            AddAndSaveButton = new AddAndSaveCommand(Save, CloseWindow, _model);
         }
 
         private void AddItem()
@@ -108,26 +108,13 @@ namespace RejestrFaktur.ViewModels
             });   
         }
 
-        private async Task Save()
+        public void Save()
         {
             AddItem();
-            using (var db = new InvoicesDbContext())
-            {
-                IInvoicesRepository repository = new InvoicesRepository(db);
-                await repository.AddInvoice(_model);
-            }
             var invoice = new GenerateInvoice(_model);
             invoice.Generate();
+            invoice.Show();
             invoice.Save($"{_model.InvoiceNumber}.pdf");
-        }
-
-        private void GenerateUnits()
-        {
-            var enumNames = Enum.GetNames(typeof(UnitsEnum));
-            foreach (string enumName in enumNames)
-            {
-                ItemUnits.Add(new ComboBoxItem() { Content = enumName });
-            }
         }
     }
 }

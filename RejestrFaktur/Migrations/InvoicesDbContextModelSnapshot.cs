@@ -140,8 +140,8 @@ namespace RejestrFaktur.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NetPrice")
-                        .HasColumnType("int");
+                    b.Property<double>("NetPrice")
+                        .HasColumnType("float");
 
                     b.Property<double>("TaxRate")
                         .HasColumnType("float");

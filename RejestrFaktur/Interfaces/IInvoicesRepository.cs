@@ -12,6 +12,7 @@ namespace RejestrFaktur.Interfaces
         Task<InvoiceModel> GetInvoiceByName(string name);
         Task<bool> AddInvoice(InvoiceModel model);
         Task<bool> UpdateInvoice(InvoiceModel model);
+        Task<bool> RemoveInvoiceById(int id);
         Task<bool> Save();
     }
 }

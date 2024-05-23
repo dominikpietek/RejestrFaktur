@@ -17,6 +17,7 @@ namespace RejestrFaktur.Services
         private byte[] _pdfDocument;
         private readonly InvoiceModel _model;
         private double _finalPrice = 0;
+        private Document _generatedDocument;
 
         public GenerateInvoice(InvoiceModel model)
         {
@@ -28,7 +29,7 @@ namespace RejestrFaktur.Services
         {
             QuestPDF.Settings.License = LicenseType.Community;
 
-            var generatedDocument = Document.Create(container =>
+            _generatedDocument = Document.Create(container =>
             {
                 container.Page(page =>
                 {
@@ -41,13 +42,20 @@ namespace RejestrFaktur.Services
                 });
             });
 
-            _pdfDocument = generatedDocument.GeneratePdf();
-            generatedDocument.GeneratePdfAndShow();
+            _pdfDocument = _generatedDocument.GeneratePdf();
         }
 
         public void Save(string fileName)
         {
             ConvertPdf.FromByteArray(_pdfDocument, fileName);
+        }
+
+        public void Show()
+        {
+            if(_generatedDocument != null)
+            {
+                _generatedDocument.GeneratePdfAndShow();
+            }
         }
 
         private void ComposeHeader(IContainer container)

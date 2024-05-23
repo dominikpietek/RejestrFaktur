@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Programs\RejestrFaktur\RejestrFaktur\App.xaml
-4-1357483196
+6-625945071
 
-401347902754
+54-292788763
 261-365965247
-Views\AddItemToInvoiceView.xaml;Views\BrowseInvoicesView.xaml;Views\CreateInvoiceView.xaml;Views\MainWindowView.xaml;
+Views\AddItemToInvoiceView.xaml;Views\BrowseInvoicesView.xaml;Views\CreateInvoiceView.xaml;Views\EditInvoiceDataView.xaml;Views\EditInvoiceElementView.xaml;Views\MainWindowView.xaml;
 
 False
 
