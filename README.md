@@ -25,9 +25,7 @@ Schemat bazy danych:
 
 # Wizualizajca aplikacji
 
-Przykładowa wygenerowana faktura:
-
-<img src="RejestrFaktur/Invoices/1.05.2024.pdf"/>
+Przykładowa wygenerowana faktura ścieżka: RejestrFaktur/Invoices/1.05.2024.pdf
 
 <img src="ReadmeResources/1.png"/>
 
